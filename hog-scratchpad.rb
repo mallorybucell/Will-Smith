@@ -7,45 +7,58 @@ require 'pry'
   #Hash with Array as value for scores/names
 
 #Find out who is playing
-
+# Array for names
+# Array for scores
+#Player counter
+#Array of hashes- score and name name: xx, score: xx  array of hashes.
+# Array for total scores (b/c hash will overwrite)
 
 def how_many_players
   scoreboard = {}
   player_names = []
 
 #add check for at least 2 players
-  puts "Please add a player name."
-  player = gets.chomp 
-  puts "You entered #{player}."
-  puts " "
-  
-  puts "To add another player, press \"a\". To start the game, press \"s\"."
+  #puts "Please add a player name:"
+  #player = gets.chomp 
+  #player_names.push(player)
+  #puts "You entered #{player}."
+  #puts
+  puts "To add \(another\) player, press \"a\". To start the game, press \"s\"."
   action = gets.chomp
     if action == "a"
+      puts "Please add a player name:"
+      player = gets.chomp 
       player_names.push(player)
+      puts "You entered #{player}."
       how_many_players
     elsif action == "s"
-      player_names.each do |name|d
+      player_names.each do |name|
       scoreboard[name] = 0
       end
-      puts scoreboard
       puts 
+      puts
+      puts scoreboard
       puts
       puts "Let's play!"
       #call player_turn
     else
-      puts "I did not understand. Please try again."
-      how_many_players
+      #puts "I did not understand. Please try again."
+      #puts "To add another player, press \"a\". To start the game, press \"s\"."
+      #how_many_players
     end
   return scoreboard
+binding.pry
 end
 
 
 
 def scoreboard_func
-  scoreboard
+  return scoreboard
 end
 
+puts "Welcome to Hog! You need at least 2 players to play."
+puts
+puts
 how_many_players
 
 
