@@ -3,6 +3,12 @@ require 'pry'
 
 
 
+namescore_pair = []
+allnames = []
+max_score = 100
+scoreboard = {}
+
+
 #Ask Player how many dice to roll
   #?? Check to make sure user put in a valid number.
 def player_turn
@@ -10,6 +16,8 @@ def player_turn
 
   puts "You can roll up to 20 6-sided dice. How many dice would you like to roll?"
   ndice = gets.chomp
+  puts
+  puts
   puts "You are rolling #{ndice} dice."
   ndice.to_i.times do |roll|
     roll = (rand(1..6))
@@ -33,16 +41,20 @@ end
 
 
 
-namescore_pair = []
-allnames = []
-max_score = 100
-scoreboard = {}
 
+
+puts
+puts "---------------------------------"
 puts "Welcome to Hog! This version of the game is played with 6-sided dice and at least 2 players."
 puts
 puts
 puts "How many players?"
 players = gets.chomp.to_i
+while players < 2
+  puts "You need at least 2 players"
+  puts "How many players?"
+  players = gets.chomp.to_i
+end
 until players == 0
   puts "Please add a player name:"
   playername = gets.chomp 
@@ -50,6 +62,7 @@ until players == 0
   puts "You entered #{playername}."
   players = players -= 1
 end
+
 
 #Put player names and scores into Hash for scoreboard
 puts "Here is your list of players:"
@@ -59,24 +72,48 @@ allnames.each do |name|
 end 
 x = 0
 namescore_pair.each do |name|
-  x = x += 1
+  x += 1
   scoreboard["Player #{x}"] = name
 end
-puts scoreboard
 puts "Let's play!"
 
-player_turn
+# gameplay
 
-#Gameplay
-# until total_score ___ ||  ___ || ___ || >= max_score
-#   puts turn_score for #hash key in v[2]
-# puts "Next Up: scoreboard[loop total number of hash keys]""
+#total_score_array = [] #scoreboard{2nd obj}
+count = allnames.length.to_i
+hash_key_gen = 0
+binding.pry
+until score_array.include?(max_score)
+hash_key_gen += 1
+  if hash_key_gen > count
+    hash_key_gen = 1
+  end
+  puts
+  puts "Here is the current scoreboard:"
+  print scoreboard
+  puts
+  puts
+  puts "----------------"
+  puts
+  puts
+  puts "Player turn: #{scoreboard["Player #{hash_key_gen}"][0]}" #Add player name from array reference
+  puts
+  scoreboard["Player #{hash_key_gen}"][1] += player_turn
+  puts
+  puts
+  check_score
+
+end
+
+puts "Good game!" #Player _ wins! Player __ is a Hog!"
+#end
+
 # end
 
 
-# puts "Good game! Player _ wins! Player __ is a Hog!"
 
 # # ACII art
 
 # #Do you want to play again? Y/N.  If Yes- restart program. If no, exit program.
+# end
 
