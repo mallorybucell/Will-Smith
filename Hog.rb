@@ -6,26 +6,27 @@ require 'pry'
 #Ask Player how many dice to roll
   #?? Check to make sure user put in a valid number.
 def player_turn
+  playerturn = []
+
   puts "You can roll up to 20 6-sided dice. How many dice would you like to roll?"
   ndice = gets.chomp
   puts "You are rolling #{ndice} dice."
-  ndice.times do |roll|
-    roll = rand(1..6)
+  ndice.to_i.times do |roll|
+    roll = (rand(1..6))
+    print "You rolled: "
     print roll, " "
+    puts
+    playerturn.push(roll)
   end
-
-  if #any die returns 1, 
-    puts "Oh no! Your turn is over. You do not get any points." #Make sure this goes to player.next turn
-    #turn score = 0
-    #call check_total_scores
+  if playerturn.to_s.include?("1")
+    puts "You do not get any points." #Make sure this goes to player.next turn
+    return 0
   else
-    puts "You rolled {Array}. You have #{turn_score} points for this turn. Do you want to roll again? Y/N?"
-      if yes
-        #store turn_score for player in player's 
-      else
-        #Add turn_score to player's total_points
-        puts "You scored {turn_score} for this turn."
-      end
+    turn_score = 0
+    playerturn.each do |eachroll|
+      turn_score = (turn_score += eachroll)
+    end
+    puts "You earned #{turn_score} points."
   end
   return turn_score
 end
@@ -63,6 +64,8 @@ namescore_pair.each do |name|
 end
 puts scoreboard
 puts "Let's play!"
+
+player_turn
 
 #Gameplay
 # until total_score ___ ||  ___ || ___ || >= max_score
