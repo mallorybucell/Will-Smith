@@ -82,12 +82,11 @@ puts "Let's play!"
 #total_score_array = [] #scoreboard{2nd obj}
 count = allnames.length.to_i
 hash_key_gen = 0
-binding.pry
-until score_array.include?(max_score)
-hash_key_gen += 1
-  if hash_key_gen > count
-    hash_key_gen = 1
-  end
+loop
+  hash_key_gen += 1
+    if hash_key_gen > count
+      hash_key_gen = 1
+    end
   puts
   puts "Here is the current scoreboard:"
   print scoreboard
@@ -98,22 +97,17 @@ hash_key_gen += 1
   puts
   puts "Player turn: #{scoreboard["Player #{hash_key_gen}"][0]}" #Add player name from array reference
   puts
-  scoreboard["Player #{hash_key_gen}"][1] += player_turn
+  scoreboard["Player #{hash_key_gen}"][1] += player_turn 
   puts
   puts
-  check_score
+  #until (scoreboard["Player #{hash_key_gen}"][1] += player_turn) == max_score
 
-end
-
-puts "Good game!" #Player _ wins! Player __ is a Hog!"
-#end
-
-# end
+puts "Good game! #{scoreboard["Player #{hash_key_gen}"][0]} wins!"
 
 
 
 # # ACII art
 
-# #Do you want to play again? Y/N.  If Yes- restart program. If no, exit program.
+# #Do you want to play again? Y/N.  If es- restart program. If no, exit program.
 # end
-
+end
