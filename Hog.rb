@@ -120,4 +120,16 @@ puts
 puts
 puts
 puts "Do you want to play again? Y/N"  
+restart = gets.chomp
+if restart == ("N" || "n")
+  puts
+  puts
+  puts "Thanks for playing!"
+  puts
+  puts
+  puts
+else
+  #File.open("restartgame.txt")
+end
+
 
