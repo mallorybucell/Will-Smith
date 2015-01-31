@@ -82,7 +82,7 @@ puts "Let's play!"
 #total_score_array = [] #scoreboard{2nd obj}
 count = allnames.length.to_i
 hash_key_gen = 0
-loop
+loop do
   hash_key_gen += 1
     if hash_key_gen > count
       hash_key_gen = 1
@@ -97,17 +97,27 @@ loop
   puts
   puts "Player turn: #{scoreboard["Player #{hash_key_gen}"][0]}" #Add player name from array reference
   puts
-  scoreboard["Player #{hash_key_gen}"][1] += player_turn 
+break if (scoreboard["Player #{hash_key_gen}"][1] += player_turn) >= max_score
   puts
   puts
-  #until (scoreboard["Player #{hash_key_gen}"][1] += player_turn) == max_score
-
-puts "Good game! #{scoreboard["Player #{hash_key_gen}"][0]} wins!"
-
-
-
-# # ACII art
-
-# #Do you want to play again? Y/N.  If es- restart program. If no, exit program.
-# end
 end
+
+
+
+# \n
+# \n
+puts
+puts
+puts
+puts "Good game! #{scoreboard["Player #{hash_key_gen}"][0]} wins!"
+puts
+puts
+puts File.read("pigascii.txt")
+puts
+puts
+puts scoreboard
+puts
+puts
+puts
+puts "Do you want to play again? Y/N"  
+
