@@ -65,7 +65,7 @@ end
 
 
 #Put player names and scores into Hash for scoreboard
-puts "Here is your list of players:"
+#Put player names into scoreboard
 
 allnames.each do |name|
   namescore_pair.push([name,0])
