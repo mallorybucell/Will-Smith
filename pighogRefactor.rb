@@ -7,7 +7,7 @@ require 'pry'
 def hog_game_players
   allnames = []
 
-
+  puts
   puts "How many players?"
   players = gets.chomp.to_i
   while players < 2
@@ -16,11 +16,15 @@ def hog_game_players
     players = gets.chomp.to_i
   end
   until players == 0
+    puts
+    puts
     puts "Please add a player name:"
     playername = gets.chomp 
     allnames.push(playername)
     puts "You entered #{playername}."
     players = players -= 1
+    puts
+    puts
   end
   return allnames
 end
@@ -50,7 +54,14 @@ def player_turn
   playerturn = []
 
   puts "You can roll up to 20 6-sided dice. How many dice would you like to roll?"
-  ndice = gets.chomp
+  ndice = gets.chomp.to_i
+binding.pry
+  unless (1..20).to_a.include?(ndice)
+    puts "That is not a valid response. Please try again."
+    puts "You can roll up to 20 6-sided dice. How many dice would you like to roll?"
+    ndice = gets.chomp.to_i
+binding.pry
+  end
   puts
   puts
   puts "You are rolling #{ndice} dice."
@@ -73,78 +84,84 @@ def player_turn
   end
   return turn_score
 end
+ 
 
+# puts
+# puts
+while true
+  #begin game
+  puts
+  puts "---------------------------------"
+  puts "Welcome to Hog! This version of the game is played with 6-sided dice and at least 2 players."
+  puts
+  puts
+  player_array = hog_game_players
+  scoreboard_current = hog_game_scoreboard(player_array)
+  puts
+  puts
+  # gameplay
+  puts "How many points would you like to play to?"
+  max_score = gets.chomp.to_i 
+  while (1..100000).to_a.include?(max_score) == false
+    puts "That is not a valid response. Please try again."
+    puts "How many points would you like to play to?"
+    puts gets.chomp.to_i
+  end
+  puts
+  puts
+  puts "Let's play!"
+  #total_score_array = [] #scoreboard{2nd obj}
+  count = player_array.length.to_i
+  hash_key_gen = 0
+  loop do
+    hash_key_gen += 1
+      if hash_key_gen > count
+        hash_key_gen = 1
+      end
+    puts
+    puts "Here is the current scoreboard:"
+    print scoreboard_current
+    puts
+    puts
+    puts "----------------"
+    puts
+    puts
+    puts "Player turn: #{scoreboard_current["Player #{hash_key_gen}"][0]}" #Add player name from array reference
+    puts
+  break if (scoreboard_current["Player #{hash_key_gen}"][1] += player_turn) >= max_score
+    puts
+    puts
+  end
 
-
-#begin game
-puts
-puts "---------------------------------"
-puts "Welcome to Hog! This version of the game is played with 6-sided dice and at least 2 players."
-puts
-puts
-player_array = hog_game_players
-scoreboard_current = hog_game_scoreboard(player_array)
-puts
-puts
-# gameplay
-puts "How many points would you like to play to?"
-max_score = gets.chomp.to_i
-until max_score.class == Fixnum
-  puts "That is not a valid number. Please try again."
-  puts gets.chomp
-end
-puts "Let's play!"
-#total_score_array = [] #scoreboard{2nd obj}
-count = player_array.length.to_i
-hash_key_gen = 0
-loop do
-  hash_key_gen += 1
-    if hash_key_gen > count
-      hash_key_gen = 1
-    end
-  puts
-  puts "Here is the current scoreboard:"
-  print scoreboard_current
-  puts
-  puts
-  puts "----------------"
-  puts
-  puts
-  puts "Player turn: #{scoreboard_current["Player #{hash_key_gen}"][0]}" #Add player name from array reference
-  puts
-break if (scoreboard_current["Player #{hash_key_gen}"][1] += player_turn) >= max_score
-  puts
-  puts
-end
-
-
-
-# \n
-# \n
-puts
-puts
-puts
-puts "Good game! #{scoreboard_current["Player #{hash_key_gen}"][0]} wins!"
-puts
-puts
-puts File.read("pigascii.txt")
-puts
-puts
-puts scoreboard_current
-puts
-puts
-puts
-puts "Do you want to play again? Y/N"  
-restart = gets.chomp
-if restart == ("N" || "n")
-  puts
-  puts
-  puts "Thanks for playing!"
   puts
   puts
   puts
-else
-  File.read("restartgame.rb")
+  puts "Good game! #{scoreboard_current["Player #{hash_key_gen}"][0]} wins!"
+  puts
+  puts
+  puts File.read("pigascii.txt")
+  puts
+  puts
+  puts scoreboard_current
+  puts
+  puts
+  puts
+  puts "Do you want to play again? Y/N"
+  restart_array = ["y", "n", "Y", "N"]  
+  restart = gets.chomp
+  unless restart_array.include?(restart) == true
+    puts "That is not a valid response. Do you want to play again?"
+    restart = gets.chomp
+  end
+  if restart == "N" || restart == "n"
+    puts
+    puts
+    puts "Thanks for playing!"
+    puts
+    puts
+    puts
+    break
+  end
 end
 
 
